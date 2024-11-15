@@ -6,9 +6,9 @@ use App\Models\User;
 use Illuminate\Http\Request;
 
 class UsersController extends Controller
-
 {
-    public readonly user $user;
+    public readonly User $user;
+
     public function __construct()
     {
         $this->user = new User();
@@ -16,10 +16,10 @@ class UsersController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+        public function index()
     {
-        $users = $this->user->all();
-        return view('users',['users' => $users]);
+        $users = User::all();
+        return view('admin.alunos.users', ['users' => $users]);
     }
 
     /**
@@ -27,7 +27,7 @@ class UsersController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.alunos.user_create');
     }
 
     /**
@@ -35,23 +35,34 @@ class UsersController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $created = $this->user->create([
+            'name' => $request->input('name'),
+            'email' => $request->input('email'),
+            'password' => password_hash($request->input('password'), PASSWORD_DEFAULT),
+            ]);
+
+            if($created){
+                return redirect()->back()->with('message', 'Sucesso');
+            }
+
+            return redirect()->back()->with('message', 'Erro');
+
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(user $user)
     {
-        //
+        return view('admin.alunos.user_delete', ['user' => $user]);
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(user $user)
+    public function edit(User $user)
     {
-        return view('user_edit',['user'=> $user]);
+        return view('admin.alunos.user_edit', ['user' => $user]);
     }
 
     /**
@@ -59,7 +70,13 @@ class UsersController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        var_dump($id);
+        $updated = $this->user->where('id', $id)->update($request->except(['_token', '_method']));
+
+        if($updated){
+            return redirect()->back()->with('message', 'Sucesso');
+        }
+
+        return redirect()->back()->with('message', 'Erro');
     }
 
     /**
@@ -67,6 +84,7 @@ class UsersController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $this->user->where ('id', $id)->delete();
+        return redirect()->route('users.index');
     }
 }

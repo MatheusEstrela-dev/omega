@@ -1,0 +1,74 @@
+
+body {
+    background-image: url
+    background-size: cover;
+    background-position: center;
+    font-family: 'Ubuntu', sans-serif;
+    color: white;
+}
+
+.login-container {
+    background-color: rgba(0, 0, 0, 0.7); /* Fundo semi-transparente */
+    border-radius: 10px;
+    padding: 2rem;
+    width: 300px;
+    margin: auto;
+    text-align: center;
+}
+
+.login-container h2 {
+    font-weight: bold;
+    margin-bottom: 1rem;
+}
+
+.login-container input[type="email"],
+.login-container input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 5px;
+    border: none;
+}
+
+.login-container button {
+    width: 100%;
+    padding: 10px;
+    margin-top: 1rem;
+    background-color: #a3893c;
+    color: white;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+}
+
+.login-container a {
+    color: #a3893c;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.button-group {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 1rem;
+}
+
+.button-group .btn {
+    width: 48%;
+    background-color: #a3893c;
+    color: white;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    padding: 10px;
+}
+
+.footer-links {
+    margin-top: 1rem;
+}
+
+.footer-links a {
+    color: #a3893c;
+    font-weight: bold;
+    text-decoration: none;
+}
