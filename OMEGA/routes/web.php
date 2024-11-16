@@ -78,3 +78,13 @@ Route::resource('users', UsersController::class);
 
 
 Route::get('/admin/alunos/users', [UsersController::class, 'index'])->name('users.index');
+
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\DashboardController;
+
+Route::get('/login', [AuthController::class, 'loginPage'])->name('login');
+Route::post('/login', [AuthController::class, 'login']);
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+
+// Rotas protegidas
+Route::get('/dashboard', [DashboardController::class, 'index']);
