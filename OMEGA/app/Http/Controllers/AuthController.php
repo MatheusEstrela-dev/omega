@@ -2,48 +2,38 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
-use App\Models\User;
+use Illuminate\Support\Facades\Session;
 
 class AuthController extends Controller
 {
-    // Tela de login
-    public function loginPage()
-    {
-        return view('auth.login');
-    }
-
-    // Processo de login
     public function login(Request $request)
     {
-        // Validar os dados recebidos
+        // Validar os dados do formulário
         $request->validate([
             'email' => 'required|email',
             'password' => 'required',
         ]);
 
-        // Buscar o usuário pelo e-mail
-        $user = User::where('email', $request->email)->first();
+        // Verificar o usuário no banco de dados
+        $user = DB::table('users')->where('email', $request->email)->first();
 
-        // Verificar se o usuário existe e se a senha está correta
-        if ($user && Hash::check($request->password, $user->password)) {
-            // Armazenar o ID do usuário na sessão
-            session(['user_id' => $user->id]);
+        if ($user && $request->password === $user->password) {
+            // Configurar os dados do usuário na sessão
+            Session::put('user_id', $user->id);
+            Session::put('user_name', $user->name);
+            Session::put('user_role', $user->role);
 
-            return redirect('/dashboard'); // Redirecionar após login bem-sucedido
+            // Redirecionar com base no papel do usuário
+            if ($user->role === 'admin') {
+                return redirect('/admin/adminpage');
+            } elseif ($user->role === 'aluno') {
+                return redirect('/aluno/alunopage');
+            }
         }
 
-        // Retornar erro se as credenciais forem inválidas
-        return back()->withErrors(['login_error' => 'E-mail ou senha inválidos.']);
-    }
-
-    // Logout do usuário
-    public function logout()
-    {
-        // Remover os dados da sessão
-        session()->forget('user_id');
-        session()->flush();
-
-        return redirect('/login');
+        // Redirecionar de volta em caso de erro
+        return back()->withErrors(['email' => 'Usuário ou senha inválidos.']);
     }
 }

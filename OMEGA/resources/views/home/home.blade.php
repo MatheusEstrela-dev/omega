@@ -9,13 +9,13 @@
 <body>
     <h2>HOME</h2>
 
-    <form action="/process_login.php" method="POST">
+    <form action="{{ route('login.process') }}" method="POST">
         @csrf
-        <label for="email">Digite seu e-mail:</label>
-        <input type="email" name="email" required><br>
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required><br>
 
-        <label for="password">Digite sua senha:</label>
-        <input type="password" name="password" required><br>
+        <label for="password">Senha:</label>
+        <input type="password" id="password" name="password" required><br>
 
         <button type="submit">Entrar</button>
     </form>

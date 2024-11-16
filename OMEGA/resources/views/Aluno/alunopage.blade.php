@@ -8,5 +8,7 @@
 </head>
 <body>
     <h2>Pagina Do Aluno</h2>
+    <h1>Bem-vindo, Aluno: {{ Session::get('user_name') }}</h1>
+<a href="/logout">Sair</a>
 </body>
 </html>

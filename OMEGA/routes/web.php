@@ -79,12 +79,34 @@ Route::resource('users', UsersController::class);
 
 Route::get('/admin/alunos/users', [UsersController::class, 'index'])->name('users.index');
 
+
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
+use Illuminate\Support\Facades\Session;
 
-Route::get('/login', [AuthController::class, 'loginPage'])->name('login');
-Route::post('/login', [AuthController::class, 'login']);
-Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
-// Rotas protegidas
-Route::get('/dashboard', [DashboardController::class, 'index']);
+// Rota para processar login
+Route::post('/login', [AuthController::class, 'login'])->name('login.process');
+
+// Rota para página do Admin
+Route::get('/admin/adminpage', function () {
+    if (Session::get('user_role') !== 'admin') {
+        return redirect('/login')->withErrors(['auth_error' => 'Acesso não autorizado.']);
+    }
+
+    return view('admin.adminpage'); // Certifique-se de que esta view exista
+});
+
+// Rota para página do Aluno
+Route::get('/aluno/alunopage', function () {
+    if (Session::get('user_role') !== 'aluno') {
+        return redirect('/login')->withErrors(['auth_error' => 'Acesso não autorizado.']);
+    }
+
+    return view('aluno.alunopage'); // Certifique-se de que esta view exista
+
+});
+
+use App\Http\Controllers\ExerciciosController;
+
+Route::resource('admin/exercicios', ExerciciosController::class);

@@ -12,7 +12,8 @@
 </head>
 <body>
  <H2>PAGINA ADMIN</H2>
-
+ <h1>Bem-vindo, {{ Session::get('user_name') }}</h1>
+ <a href="/logout">Sair</a>
         <div class="botoes">
             <button type="button" onclick="window.location.href='{{ url('admin/alunos/users') }}';" class="btn">Excluir Perfil</button>
         <button type="submit" class="btn" onclick="window.location.href='{{ url('admin/exercicios/editarexercicios') }}';">Editar Biblioteca de Exercícios </button>
