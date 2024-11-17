@@ -2,8 +2,6 @@
 
 @section('content')
 
-{{-- Depuração --}}
-@dump($exercicios)
 <h2>Lista de Exercícios</h2>
 
 <table class="table">

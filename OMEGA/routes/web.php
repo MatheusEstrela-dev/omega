@@ -110,3 +110,12 @@ Route::get('exercicios/test', function () {
     $exercicios = App\Models\BibliotecaExercicio::all();
     dd($exercicios);
 });
+
+use Illuminate\Support\Facades\Auth;
+
+Route::get('/logout', function () {
+    Auth::logout(); // Realiza o logout
+    session()->invalidate(); // Invalida a sessão do usuário
+    session()->regenerateToken(); // Regenera o token CSRF
+    return redirect('/home'); // Redireciona para a página home
+})->name('logout');
