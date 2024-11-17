@@ -15,7 +15,7 @@ class AlunoController extends Controller
             Aluno::create([
                 'nome' => $request->nome,
                 'email' => $request->email,
-                'senha' => bcrypt($request->senha), //criptografar a senha
+                'senha' => ($request->senha),
                 'cpf' => $request->cpf,
             ]);
 
