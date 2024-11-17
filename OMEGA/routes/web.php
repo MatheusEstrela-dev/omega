@@ -14,9 +14,6 @@ Route::get('/home', function () {
     return view('home.home');
 });
 
-Route::get('home/termos', function () {
-    return view('home.termos');
-});
 
 Route::get('home/termos', function () {
     return view('home.termos');
@@ -63,9 +60,6 @@ Route::get('admin/alunos/excluirusuario', function () {
     return view('admin.alunos.excluirusuario');
 });
 
-Route::get('admin/exercicios/editarexercicios', function () {
-    return view('admin.exercicios.editarexercicios');
-});
 
 Route::get('adminpage/', function () {
     return view('admin.excluirusario');
@@ -110,3 +104,9 @@ Route::get('/aluno/alunopage', function () {
 use App\Http\Controllers\ExerciciosController;
 
 Route::resource('admin/exercicios', ExerciciosController::class);
+Route::resource('exercicios', ExerciciosController::class);
+
+Route::get('exercicios/test', function () {
+    $exercicios = App\Models\BibliotecaExercicio::all();
+    dd($exercicios);
+});

@@ -16,7 +16,7 @@
  <a href="/logout">Sair</a>
         <div class="botoes">
             <button type="button" onclick="window.location.href='{{ url('admin/alunos/users') }}';" class="btn">Excluir Perfil</button>
-        <button type="submit" class="btn" onclick="window.location.href='{{ url('admin/exercicios/editarexercicios') }}';">Editar Biblioteca de Exercícios </button>
+        <button type="submit" class="btn" onclick="window.location.href='{{ url('admin/exercicios/') }}';">Editar Biblioteca de Exercícios </button>
         </div>
     <div class="container">
         @yield('content')
