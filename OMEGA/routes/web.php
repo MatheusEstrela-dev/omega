@@ -107,11 +107,6 @@ Route::resource('exercicios', ExerciciosController::class);
 Route::prefix('admin')->group(function () {
     Route::resource('exercicios', ExerciciosController::class);
 });
-Route::get('exercicios/test', function () {
-    $exercicios = App\Models\BibliotecaExercicio::all();
-    dd($exercicios);
-});
-
 use Illuminate\Support\Facades\Auth;
 
 Route::get('/logout', function () {
