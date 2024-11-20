@@ -10,7 +10,8 @@
     </div>
 @endif
 
-<div class="mb-3">
+<div class="mb-3 d-flex justify-content-between">
+    <a href="javascript:history.back()" class="btn btn-secondary">Voltar</a>
     <a href="{{ route('exercicios.create') }}" class="btn btn-success">Criar Novo Exercício</a>
 </div>
 

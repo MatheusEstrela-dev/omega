@@ -3,7 +3,7 @@
 @section('content')
 
 <a href="{{ route ('users.create')}}">Criar</a>
-
+<a href="javascript:history.back()" class="btn btn-secondary">Voltar</a>
 <h2>Usuarios</h2>
 
 <ul>
