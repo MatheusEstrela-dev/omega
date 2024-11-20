@@ -10,7 +10,7 @@
     </div>
 @endif
 
-<form action="{{ route('admin.exercicios.store') }}" method="POST">
+<form action="{{ route('exercicios.store') }}" method="POST">
     @csrf
     <div class="form-group">
         <label for="NomeExercicio">Nome do Exercício:</label>
