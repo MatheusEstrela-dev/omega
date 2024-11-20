@@ -2,19 +2,37 @@
 
 @section('content')
 
-<h2>Editar</h2>
+<h2>Lista de Exercícios</h2>
 
-@if (session()->has('message'))
-    {{session()->get('message')}}
-@endif
-
-
-<form action="{{ route ('users.update', ['user' => $user->id]) }}" method="post">
-    @csrf
-    <input type="hidden" name="_method" value="PUT">
-    <input type="text" name="name" value="{{ $user->name}}">
-    <input type="text" name="email" value="{{ $user->email}}">
-    <button type="submit">Update</button>
-</form>
+<table class="table">
+    <thead>
+        <tr>
+            <!-- Removendo a exibição do ID -->
+            <th hidden>ID</th>
+            <th>Nome</th>
+            <th>Tipo</th>
+            <th>Ações</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach($exercicios as $exercicio)
+        <tr>
+            <!-- Escondendo o ID da exibição -->
+            <td hidden>{{ $exercicio->Id_Exerc }}</td>
+            <td>{{ $exercicio->NomeExercicio }}</td>
+            <td>{{ $exercicio->Tipo_Exerc }}</td>
+            <td>
+                <!-- Rotas utilizando o ID -->
+                <a href="{{ route('exercicios.edit', $exercicio->Id_Exerc) }}" class="btn btn-warning">Editar</a>
+                <form action="{{ route('exercicios.destroy', $exercicio->Id_Exerc) }}" method="POST" style="display: inline-block;">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" class="btn btn-danger">Deletar</button>
+                </form>
+            </td>
+        </tr>
+        @endforeach
+    </tbody>
+</table>
 
 @endsection

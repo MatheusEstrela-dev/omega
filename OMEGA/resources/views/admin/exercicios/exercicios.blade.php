@@ -4,10 +4,20 @@
 
 <h2>Lista de Exercícios</h2>
 
+@if (session()->has('message'))
+    <div class="alert alert-success">
+        {{ session()->get('message') }}
+    </div>
+@endif
+
+<div class="mb-3">
+    <a href="{{ route('exercicios.create') }}" class="btn btn-success">Criar Novo Exercício</a>
+</div>
+
 <table class="table">
     <thead>
         <tr>
-            <th>ID</th>
+            <th hidden>ID</th>
             <th>Nome</th>
             <th>Tipo</th>
             <th>Ações</th>
@@ -16,7 +26,8 @@
     <tbody>
         @foreach($exercicios as $exercicio)
         <tr>
-            <td>{{ $exercicio->Id_Exerc }}</td>
+            <!-- Esconde o ID -->
+            <td hidden>{{ $exercicio->Id_Exerc }}</td>
             <td>{{ $exercicio->NomeExercicio }}</td>
             <td>{{ $exercicio->Tipo_Exerc }}</td>
             <td>

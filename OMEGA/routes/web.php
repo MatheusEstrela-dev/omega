@@ -103,9 +103,10 @@ Route::get('/aluno/alunopage', function () {
 
 use App\Http\Controllers\ExerciciosController;
 
-Route::resource('admin/exercicios', ExerciciosController::class);
 Route::resource('exercicios', ExerciciosController::class);
-
+Route::prefix('admin')->group(function () {
+    Route::resource('exercicios', ExerciciosController::class);
+});
 Route::get('exercicios/test', function () {
     $exercicios = App\Models\BibliotecaExercicio::all();
     dd($exercicios);

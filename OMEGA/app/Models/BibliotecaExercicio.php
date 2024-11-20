@@ -2,26 +2,18 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class BibliotecaExercicio extends Model
 {
-    use HasFactory;
+    protected $table = 'BibliotecaExercicio'; // Nome da tabela
+    protected $primaryKey = 'Id_Exerc'; // Define o campo primário da tabela
+    public $incrementing = true; // Define se o campo primário é auto-incrementado
+    protected $keyType = 'int'; // Tipo do campo primário
 
-    // Nome da tabela no banco de dados
-    protected $table = 'BibliotecaExercicio';
-
-    // Nome da chave primária (se não for 'id')
-    protected $primaryKey = 'Id_Exerc';
-
-    // Indica que a tabela não possui timestamps
+    // Desativa o controle de timestamps
     public $timestamps = false;
 
-    // Permite inserção em massa de campos específicos
-    protected $fillable = [
-        'NomeExercicio',
-        'Tipo_Exerc',
-        'CodigoAdm'
-    ];
+    // Campos que podem ser preenchidos em massa
+    protected $fillable = ['NomeExercicio', 'Tipo_Exerc', 'CodigoAdm'];
 }
